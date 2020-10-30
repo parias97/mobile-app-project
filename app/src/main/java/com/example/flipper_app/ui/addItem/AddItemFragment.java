@@ -20,8 +20,7 @@ public class AddItemFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        addItemViewModel =
-                ViewModelProviders.of(this).get(AddItemViewModel.class);
+        addItemViewModel = ViewModelProviders.of(this).get(AddItemViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_item, container, false);
         final TextView textView = root.findViewById(R.id.text_add_item);
         addItemViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

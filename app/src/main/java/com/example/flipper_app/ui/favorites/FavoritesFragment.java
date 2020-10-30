@@ -1,6 +1,7 @@
 package com.example.flipper_app.ui.favorites;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class FavoritesFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
         return root;
     }
 }

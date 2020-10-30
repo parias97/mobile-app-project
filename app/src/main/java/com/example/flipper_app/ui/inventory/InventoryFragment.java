@@ -1,5 +1,4 @@
-package com.example.flipper_app.ui.search;
-
+package com.example.flipper_app.ui.inventory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,23 +13,25 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.flipper_app.R;
+import com.example.flipper_app.ui.inventory.InventoryViewModel;
 
-public class SearchFragment extends Fragment {
+public class InventoryFragment extends Fragment {
 
-    private SearchViewModel searchViewModel;
+    private InventoryViewModel inventoryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        searchViewModel =
-                ViewModelProviders.of(this).get(SearchViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_search, container, false);
-        final TextView textView = root.findViewById(R.id.text_search);
-        searchViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        inventoryViewModel =
+                ViewModelProviders.of(this).get(InventoryViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_inventory, container, false);
+        final TextView textView = root.findViewById(R.id.text_inventory);
+        inventoryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
         });
+
         return root;
     }
 }

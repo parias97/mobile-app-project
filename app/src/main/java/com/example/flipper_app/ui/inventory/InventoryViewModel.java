@@ -1,16 +1,16 @@
-package com.example.flipper_app.ui.search;
+package com.example.flipper_app.ui.inventory;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SearchViewModel extends ViewModel {
+public class InventoryViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SearchViewModel() {
+    public InventoryViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("test");
+        mText.setValue("My Inventory!");
     }
 
     public LiveData<String> getText() {
