@@ -10,6 +10,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
     AppBarConfiguration appBarConfiguration;
@@ -24,12 +26,12 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Find the navController (controls which views to display in NavHost) within NavHost
          * (fragment container).
-         */
+         **/
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         /**
          * Instantiate appBarConfiguration to define which fragments are the top-level fragments.
          * This will allow us to go up when viewing non-top-level fragments.
-         */
+         **/
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);

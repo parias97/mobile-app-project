@@ -4,4 +4,7 @@
     <string name="title_add_item">Add Item</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_inventory">Inventory</string>
+    <string name="title_home">Home</string>
+    <string name="tab_text_1">Inventory</string>
+    <string name="tab_text_2">Sold</string>
 </resources>
