@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.inventory.InventoryFragment">
 
-
     <!--<RelativeLayout
         android:layout_width="1000px"
         android:layout_height="400px"
@@ -53,20 +52,13 @@
             android:paddingLeft="20px"
             android:text="Profit"
             android:textColor="#FFFFFF" />
-    </RelativeLayout>-->
+    </RelativeLayout> -->
 
-    <TextView
-        android:id="@+id/text_inventory"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center_horizontal"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

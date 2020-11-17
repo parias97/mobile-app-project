@@ -10,20 +10,50 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flipper_app.R;
+import com.example.flipper_app.adapter.ItemAdapter;
+import com.example.flipper_app.model.Item;
+import com.example.flipper_app.ui.ItemViewModel;
+
+import java.util.List;
 
 public class InventoryFragment extends Fragment {
 
-    private InventoryViewModel inventoryViewModel;
+    private ItemViewModel itemViewModel;
+    //private InventoryViewModel inventoryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        inventoryViewModel =
-                ViewModelProviders.of(this).get(InventoryViewModel.class);
+        /*inventoryViewModel =
+                new ViewModelProvider(this).get(InventoryViewModel.class);*/
         View root = inflater.inflate(R.layout.fragment_inventory, container, false);
 
+        // Setup RecyclerView to hold items.
+        RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setHasFixedSize(true);
+
+        final ItemAdapter adapter = new ItemAdapter();
+        recyclerView.setAdapter(adapter);
+
+        itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+
+        itemViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
+            @Override
+            public void onChanged(@Nullable List<Item> items) {
+                adapter.setItems(items);
+            }
+        });
+
         return root;
+    }
+
+    public static InventoryFragment newInstance(){
+        return new InventoryFragment();
     }
 }
