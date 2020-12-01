@@ -1,5 +1,6 @@
 package com.example.flipper_app.ui.inventory;
 
+import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.example.flipper_app.adapter.ItemAdapter;
 import com.example.flipper_app.model.Item;
 import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.addItem.AddItemViewModel;
+import com.example.flipper_app.ui.summary.SummaryFragment;
 
 import java.util.List;
 
@@ -51,6 +53,17 @@ public class InventoryFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        insertNestedFragment();
+    }
+
+    private void insertNestedFragment() {
+        Fragment childFragment = new SummaryFragment();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_summary, childFragment).commit();
     }
 
     public void addToSoldTable(View view){
