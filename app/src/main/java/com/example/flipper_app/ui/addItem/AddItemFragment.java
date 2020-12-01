@@ -52,6 +52,10 @@ public class AddItemFragment extends Fragment {
         itemPicPathET = root.findViewById(R.id.itemPicpath);
         saveButton = root.findViewById(R.id.saveButton);
 
+        itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
+        addItemViewModel = new ViewModelProvider(this).get(AddItemViewModel.class);
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,13 +105,4 @@ public class AddItemFragment extends Fragment {
         Item item = new Item(title, desc, initPrice, quantity, platform, picpath, false);
         itemViewModel.insert(item);
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
-        addItemViewModel = new ViewModelProvider(this).get(AddItemViewModel.class);
-    }
-
 }
