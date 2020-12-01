@@ -1,6 +1,5 @@
 package com.example.flipper_app.ui.addItem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.flipper_app.R;
 import com.example.flipper_app.model.Item;
 import com.example.flipper_app.ui.ItemViewModel;
+import com.example.flipper_app.ui.sold.SoldItemViewModel;
 
 public class AddItemFragment extends Fragment {
 
@@ -30,8 +30,10 @@ public class AddItemFragment extends Fragment {
             "com.example.flipper_app.ui.addItem.EXTRA_PICPATH";
 
     private ItemViewModel itemViewModel;
+    private SoldItemViewModel soldItemViewModel;
     private AddItemViewModel addItemViewModel;
     private EditText itemNameET;
+    private EditText itemDescET;
     private EditText itemInitPriceET;
     private EditText itemQuantityET;
     private EditText itemPlatformET;
@@ -41,9 +43,11 @@ public class AddItemFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
         addItemViewModel = new ViewModelProvider(this).get(AddItemViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_item, container, false);
         itemNameET = root.findViewById(R.id.itemName);
+        itemDescET = root.findViewById(R.id.itemDesc);
         itemInitPriceET = root.findViewById(R.id.itemInitPrice);
         itemQuantityET = root.findViewById(R.id.itemQuantity);
         itemPlatformET = root.findViewById(R.id.itemPlatform);
@@ -62,62 +66,41 @@ public class AddItemFragment extends Fragment {
             public void onChanged(String s) {
                 Log.d("new data", s);
                 if(s == "true"){
-                    Log.d("item name", addItemViewModel.getItemName());
                     insertItem();
                     addItemViewModel.setSaved("false");
                 }
-                /*if(addItemViewModel.getItemName() != null) {
-                    Log.d("item name", addItemViewModel.getItemName());
-                } else {
-                    Log.d("isNull", "true");
-                }*/
             }
         });
 
-        /*addItemViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
         return root;
     }
 
     private void saveButton(){
         String title = itemNameET.getText().toString();
+        String desc = itemDescET.getText().toString();
         double initPrice = Double.parseDouble(itemInitPriceET.getText().toString());
         int itemQuantity = Integer.parseInt(itemQuantityET.getText().toString());
         String platform = itemPlatformET.getText().toString();
         String path = itemPicPathET.getText().toString();
 
         addItemViewModel.setItemName(title);
+        addItemViewModel.setDesc(desc);
         addItemViewModel.setInitPrice(initPrice);
         addItemViewModel.setQuantity(itemQuantity);
         addItemViewModel.setPlatform(platform);
         addItemViewModel.setPicPath(path);
-
-        Log.d("inside saveButton", "true");
         addItemViewModel.setSaved("true");
-
-        /*Intent data = new Intent();
-        data.putExtra(EXTRA_TITLE, title);
-        data.putExtra(EXTRA_INITPRICE, initPrice);
-        data.putExtra(EXTRA_QUANTITY, itemQuantity);
-        data.putExtra(EXTRA_PLATFORM, platform);
-        data.putExtra(EXTRA_PICPATH, path);
-
-        getActivity().setResult(getActivity().RESULT_OK, data);
-        getActivity().finish();*/
     }
 
     private void insertItem(){
         String title = addItemViewModel.getItemName();
+        String desc = addItemViewModel.getDesc();
         double initPrice = addItemViewModel.getInitPrice();
         int quantity = addItemViewModel.getQuantity();
         String platform = addItemViewModel.getPlatform();
         String picpath = addItemViewModel.getPicPath();
 
-        Item item = new Item(title, initPrice, quantity, platform, picpath);
+        Item item = new Item(title, desc, initPrice, quantity, platform, picpath, false);
         itemViewModel.insert(item);
     }
 }

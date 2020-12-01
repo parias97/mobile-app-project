@@ -17,7 +17,7 @@ import com.example.flipper_app.ui.inventory.InventoryFragment;
 
 public class SoldFragment extends Fragment {
 
-    private SoldViewModel soldViewModel;
+    private SoldItemViewModel soldViewModel;
 
     public static SoldFragment newInstance() {
         return new SoldFragment();
@@ -26,7 +26,7 @@ public class SoldFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         soldViewModel =
-               new ViewModelProvider(this).get(SoldViewModel.class);
+               new ViewModelProvider(this).get(SoldItemViewModel.class);
         View root = inflater.inflate(R.layout.fragment_sold, container, false);
         /*final TextView textView = root.findViewById(R.id.text_search);
         soldViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -41,7 +41,7 @@ public class SoldFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        soldViewModel = new ViewModelProvider(this).get(SoldViewModel.class);
+        soldViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
     }
 
 

@@ -80,7 +80,4 @@ public class AddItemViewModel extends ViewModel {
         this.desc = desc;
     }
 
-    /*public LiveData<String> getText() {
-        return mText;
-    }*/
 }

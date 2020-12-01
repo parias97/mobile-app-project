@@ -9,12 +9,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Item.class}, version = 1)
+@Database(entities = {Item.class, SoldItem.class}, version = 1)
 public abstract class ItemDatabase extends RoomDatabase {
 
     private static ItemDatabase instance;
 
     public abstract ItemDao itemDao();
+
+    public abstract SoldItemDao soldItemDao();
 
     /* Create an ItemDatabase singleton. Only one database is needed.
      * This method is synchronized to prevent multiple threads from
@@ -42,16 +44,13 @@ public abstract class ItemDatabase extends RoomDatabase {
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private ItemDao itemDao;
+        private SoldItemDao soldItemDao;
         private PopulateDbAsyncTask(ItemDatabase db) {
             itemDao = db.itemDao();
+            soldItemDao = db.soldItemDao();
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            // date added, sold (boolean)
-            // handle edge cases (quantity 1, sold 5)
-            itemDao.insert(new Item("Transformer",  2.30, 1, "eBay", "./test1"));
-            itemDao.insert(new Item("Narnia Book", 3.23, 2, "eBay", "./test2"));
-            itemDao.insert(new Item("Jay-Z Album", 6.78, 3,"eBay", "./test3"));
             return null;
         }
     }
