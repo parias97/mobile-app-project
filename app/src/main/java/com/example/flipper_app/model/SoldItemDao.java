@@ -10,20 +10,20 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ItemDao {
+public interface SoldItemDao {
 
     @Insert
-    void insert(Item item);
+    void insert(SoldItem item);
 
     @Update
-    void update(Item item);
+    void update(SoldItem item);
 
     @Delete
-    void delete(Item item);
+    void delete(SoldItem item);
 
-    @Query("DELETE FROM item_table")
-    void deleteAllItems();
+    @Query("DELETE FROM sold_table")
+    void deleteAllSoldItems();
 
-    @Query("SELECT * FROM item_table")
-    LiveData<List<Item>> getAllItems();
+    @Query("SELECT * FROM sold_table")
+    LiveData<List<SoldItem>> getAllSoldItems();
 }

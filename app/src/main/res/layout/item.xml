@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/item_pic"
@@ -22,7 +23,8 @@
             android:id="@+id/item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/item_pic"/>
+            android:layout_toRightOf="@id/item_pic"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/item_initial_price_label"
@@ -32,7 +34,8 @@
             android:layout_toRightOf="@id/item_pic"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Initial Price:" />
+            android:text="Initial Price:"
+            android:textColor="#FFFFFF"/>
 
 
         <TextView
@@ -41,7 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/item_name"
             android:layout_toRightOf="@id/item_initial_price_label"
-            android:ellipsize="end" />
+            android:ellipsize="end"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/item_quantity_label"
@@ -51,14 +55,16 @@
             android:layout_toRightOf="@id/item_pic"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Quantity:" />
+            android:text="Quantity:"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/item_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/item_initial_price_label"
-            android:layout_toRightOf="@id/item_quantity_label"/>
+            android:layout_toRightOf="@id/item_quantity_label"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/item_platform_label"
@@ -66,13 +72,32 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/item_quantity"
             android:layout_toRightOf="@id/item_pic"
-            android:text="Platform:" />
+            android:text="Platform:"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/item_platform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/item_quantity"
-            android:layout_toRightOf="@id/item_platform_label"/>
+            android:layout_toRightOf="@id/item_platform_label"
+            android:textColor="#FFFFFF"/>
+
+        <ImageView
+            android:id="@+id/favoriteIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/favorite_ic" />
+
+        <ImageButton
+            android:id="@+id/soldIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="50dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/sold_ic" />
     </RelativeLayout>
+
 </androidx.cardview.widget.CardView>

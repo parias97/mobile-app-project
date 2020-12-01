@@ -18,6 +18,16 @@
         tools:layout_editor_absoluteX="8dp" />
 
     <EditText
+        android:id="@+id/itemDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:hint="Item Description"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+
+    <EditText
         android:id="@+id/itemInitPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +35,7 @@
         android:hint="Item Init Price"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+        app:layout_constraintTop_toBottomOf="@+id/itemDesc" />
 
     <EditText
         android:id="@+id/itemQuantity"
