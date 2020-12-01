@@ -25,6 +25,7 @@ import com.example.flipper_app.adapter.ItemAdapter;
 import com.example.flipper_app.model.Item;
 import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.addItem.AddItemFragment;
+import com.example.flipper_app.ui.addItem.AddItemViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -33,12 +34,13 @@ public class InventoryFragment extends Fragment {
 
     public static final int ADD_ITEM_REQUEST = 1;
     private ItemViewModel itemViewModel;
+    private AddItemViewModel addItemViewModel;
     //private InventoryViewModel inventoryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        /*inventoryViewModel =
-                new ViewModelProvider(this).get(InventoryViewModel.class);*/
+         addItemViewModel =
+                new ViewModelProvider(this).get(AddItemViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_inventory, container, false);
 
         // Setup RecyclerView to hold items.
@@ -58,9 +60,33 @@ public class InventoryFragment extends Fragment {
             }
         });
 
+        // inventory needs to know when the item has been saved
+
+        addItemViewModel.getSaved().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.d("new data", s);
+                if(s == "true"){
+                    Log.d("item name", addItemViewModel.getItemName());
+                }
+                /*if(addItemViewModel.getItemName() != null) {
+                    Log.d("item name", addItemViewModel.getItemName());
+                } else {
+                    Log.d("isNull", "true");
+                }*/
+            }
+        });
+
+        /*if(addItemViewModel.getItemName() != null) {
+            Log.d("item name", addItemViewModel.getItemName());
+        } else {
+            Log.d("item name", "null");
+        }*/
+
         return root;
     }
-
+    // GOAL: figure out how to save data in one fragment and display it in another?
+    // HOW?
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

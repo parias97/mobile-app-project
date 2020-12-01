@@ -2,6 +2,7 @@ package com.example.flipper_app.ui.addItem;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,8 @@ public class AddItemFragment extends Fragment {
     public static final String EXTRA_PICPATH =
             "com.example.flipper_app.ui.addItem.EXTRA_PICPATH";
 
-
-    //private AddItemViewModel addItemViewModel;
     private ItemViewModel itemViewModel;
+    private AddItemViewModel addItemViewModel;
     private EditText itemNameET;
     private EditText itemInitPriceET;
     private EditText itemQuantityET;
@@ -39,6 +39,7 @@ public class AddItemFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        addItemViewModel = new ViewModelProvider(this).get(AddItemViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_item, container, false);
         itemNameET = root.findViewById(R.id.itemName);
         itemInitPriceET = root.findViewById(R.id.itemInitPrice);
@@ -70,7 +71,16 @@ public class AddItemFragment extends Fragment {
         String platform = itemPlatformET.getText().toString();
         String path = itemPicPathET.getText().toString();
 
-        Intent data = new Intent();
+        addItemViewModel.setItemName(title);
+        addItemViewModel.setInitPrice(initPrice);
+        addItemViewModel.setQuantity(itemQuantity);
+        addItemViewModel.setPlatform(platform);
+        addItemViewModel.setPlatform(path);
+
+        Log.d("inside saveButton", "true");
+        addItemViewModel.setSaved("true");
+
+        /*Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_INITPRICE, initPrice);
         data.putExtra(EXTRA_QUANTITY, itemQuantity);
@@ -78,6 +88,6 @@ public class AddItemFragment extends Fragment {
         data.putExtra(EXTRA_PICPATH, path);
 
         getActivity().setResult(getActivity().RESULT_OK, data);
-        getActivity().finish();
+        getActivity().finish();*/
     }
 }
