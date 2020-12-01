@@ -52,7 +52,7 @@ public abstract class ItemDatabase extends RoomDatabase {
             itemDao.insert(new Item("Transformer",  2.30, 1, "eBay", "./test1"));
             itemDao.insert(new Item("Narnia Book", 3.23, 2, "eBay", "./test2"));
             itemDao.insert(new Item("Jay-Z Album", 6.78, 3,"eBay", "./test3"));
-            return null;
+        return null;
         }
     }
 }
