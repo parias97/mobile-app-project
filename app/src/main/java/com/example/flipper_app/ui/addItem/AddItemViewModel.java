@@ -9,8 +9,8 @@ public class AddItemViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
     public AddItemViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is add item fragment");
+        //mText = new MutableLiveData<>();
+        //mText.setValue("This is add item fragment");
     }
 
     public LiveData<String> getText() {
