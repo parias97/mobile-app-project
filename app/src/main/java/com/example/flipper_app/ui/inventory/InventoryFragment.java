@@ -61,21 +61,20 @@ public class InventoryFragment extends Fragment {
         });
 
         // inventory needs to know when the item has been saved
-
-        addItemViewModel.getSaved().observe(getViewLifecycleOwner(), new Observer<String>() {
+        /*addItemViewModel.getSaved().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 Log.d("new data", s);
                 if(s == "true"){
                     Log.d("item name", addItemViewModel.getItemName());
                 }
-                /*if(addItemViewModel.getItemName() != null) {
+                if(addItemViewModel.getItemName() != null) {
                     Log.d("item name", addItemViewModel.getItemName());
                 } else {
                     Log.d("isNull", "true");
-                }*/
+                }
             }
-        });
+        });*/
 
         /*if(addItemViewModel.getItemName() != null) {
             Log.d("item name", addItemViewModel.getItemName());
@@ -88,7 +87,7 @@ public class InventoryFragment extends Fragment {
     // GOAL: figure out how to save data in one fragment and display it in another?
     // HOW?
 
-    @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == getActivity().RESULT_OK) {
@@ -104,7 +103,7 @@ public class InventoryFragment extends Fragment {
         } else {
             Toast.makeText(this.getContext(), "Item not saved", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
     public static InventoryFragment newInstance(){
         return new InventoryFragment();

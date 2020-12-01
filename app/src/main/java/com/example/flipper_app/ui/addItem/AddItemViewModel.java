@@ -17,6 +17,16 @@ public class AddItemViewModel extends ViewModel {
     private String platform;
     private String desc;
 
+    public String getPicPath() {
+        return picPath;
+    }
+
+    public void setPicPath(String picPath) {
+        this.picPath = picPath;
+    }
+
+    private String picPath;
+
     public AddItemViewModel() {
         saved = new MutableLiveData<>();
         saved.setValue("false");

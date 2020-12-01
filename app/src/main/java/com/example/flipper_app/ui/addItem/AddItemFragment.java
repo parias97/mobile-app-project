@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.flipper_app.R;
+import com.example.flipper_app.model.Item;
 import com.example.flipper_app.ui.ItemViewModel;
 
 public class AddItemFragment extends Fragment {
@@ -55,6 +57,23 @@ public class AddItemFragment extends Fragment {
             }
         });
 
+        addItemViewModel.getSaved().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.d("new data", s);
+                if(s == "true"){
+                    Log.d("item name", addItemViewModel.getItemName());
+                    insertItem();
+                    addItemViewModel.setSaved("false");
+                }
+                /*if(addItemViewModel.getItemName() != null) {
+                    Log.d("item name", addItemViewModel.getItemName());
+                } else {
+                    Log.d("isNull", "true");
+                }*/
+            }
+        });
+
         /*addItemViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -75,7 +94,7 @@ public class AddItemFragment extends Fragment {
         addItemViewModel.setInitPrice(initPrice);
         addItemViewModel.setQuantity(itemQuantity);
         addItemViewModel.setPlatform(platform);
-        addItemViewModel.setPlatform(path);
+        addItemViewModel.setPicPath(path);
 
         Log.d("inside saveButton", "true");
         addItemViewModel.setSaved("true");
@@ -89,5 +108,16 @@ public class AddItemFragment extends Fragment {
 
         getActivity().setResult(getActivity().RESULT_OK, data);
         getActivity().finish();*/
+    }
+
+    private void insertItem(){
+        String title = addItemViewModel.getItemName();
+        double initPrice = addItemViewModel.getInitPrice();
+        int quantity = addItemViewModel.getQuantity();
+        String platform = addItemViewModel.getPlatform();
+        String picpath = addItemViewModel.getPicPath();
+
+        Item item = new Item(title, initPrice, quantity, platform, picpath);
+        itemViewModel.insert(item);
     }
 }
