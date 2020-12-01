@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -42,9 +43,6 @@ public class AddItemFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
-        addItemViewModel = new ViewModelProvider(this).get(AddItemViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_item, container, false);
         itemNameET = root.findViewById(R.id.itemName);
         itemDescET = root.findViewById(R.id.itemDesc);
@@ -103,4 +101,13 @@ public class AddItemFragment extends Fragment {
         Item item = new Item(title, desc, initPrice, quantity, platform, picpath, false);
         itemViewModel.insert(item);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
+        addItemViewModel = new ViewModelProvider(this).get(AddItemViewModel.class);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.flipper_app.ui.sold;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -7,17 +8,27 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.flipper_app.R;
+import com.example.flipper_app.adapter.ItemAdapter;
+import com.example.flipper_app.adapter.SoldItemAdapter;
+import com.example.flipper_app.model.Item;
+import com.example.flipper_app.model.SoldItem;
+import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.inventory.InventoryFragment;
+
+import java.util.List;
 
 public class SoldFragment extends Fragment {
 
-    private SoldItemViewModel soldViewModel;
+    private SoldItemViewModel soldItemViewModel;
+    private View root;
 
     public static SoldFragment newInstance() {
         return new SoldFragment();
@@ -25,23 +36,36 @@ public class SoldFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        soldViewModel =
-               new ViewModelProvider(this).get(SoldItemViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_sold, container, false);
-        /*final TextView textView = root.findViewById(R.id.text_search);
-        soldViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+        root = inflater.inflate(R.layout.fragment_sold, container, false);
+
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Setup RecyclerView to hold items.
+        final RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setHasFixedSize(true);
+
+        final SoldItemAdapter adapter = new SoldItemAdapter();
+        recyclerView.setAdapter(adapter);
+
+        soldItemViewModel.getAllSoldItems().observe(getViewLifecycleOwner(), new Observer<List<SoldItem>>() {
+            @Override
+            public void onChanged(@Nullable List<SoldItem> soldItems) {
+                adapter.setItems(soldItems);
+            }
+        });
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        soldViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
+        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
     }
 
 

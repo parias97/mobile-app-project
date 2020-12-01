@@ -38,7 +38,6 @@ public class ItemRepository {
     public LiveData<List<Item>> getAllItems() {
         return allItems;
     }
-
     // Allow these operations to run in the background.
     private static class InsertItemAsyncTask extends AsyncTask<Item, Void, Void> {
         private ItemDao itemDao;

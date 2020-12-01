@@ -41,8 +41,6 @@ public class InventoryFragment extends Fragment {
         final ItemAdapter adapter = new ItemAdapter();
         recyclerView.setAdapter(adapter);
 
-
-
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
         itemViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
