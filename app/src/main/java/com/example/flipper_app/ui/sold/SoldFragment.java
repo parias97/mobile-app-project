@@ -11,9 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.flipper_app.R;
 import com.example.flipper_app.adapter.ItemAdapter;
@@ -45,6 +47,8 @@ public class SoldFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
+
         // Setup RecyclerView to hold items.
         final RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -59,14 +63,5 @@ public class SoldFragment extends Fragment {
                 adapter.setItems(soldItems);
             }
         });
-
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
-    }
-
-
 }

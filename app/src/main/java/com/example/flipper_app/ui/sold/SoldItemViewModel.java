@@ -5,11 +5,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
-import com.example.flipper_app.model.Item;
-import com.example.flipper_app.model.ItemRepository;
 import com.example.flipper_app.model.SoldItem;
 import com.example.flipper_app.model.SoldItemRepository;
 

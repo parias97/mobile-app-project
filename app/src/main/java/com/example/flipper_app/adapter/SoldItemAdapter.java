@@ -15,22 +15,23 @@ import com.example.flipper_app.model.SoldItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SoldItemAdapter extends RecyclerView.Adapter<SoldItemAdapter.ItemHolder> {
+public class SoldItemAdapter extends RecyclerView.Adapter<SoldItemAdapter.SoldItemHolder> {
 
     private List<SoldItem> items = new ArrayList<>();
 
     @NonNull
     @Override
-    public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SoldItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item, parent, false);
-        return new ItemHolder(itemView);
+                .inflate(R.layout.solditem_cardview, parent, false);
+        return new SoldItemHolder(itemView);
     }
     @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SoldItemHolder holder, int position) {
         SoldItem currentItem = items.get(position);
         holder.itemNameTV.setText(currentItem.getName());
         holder.itemInitialPriceTV.setText(String.valueOf(currentItem.getInitialPrice()));
+        holder.itemSoldPriceTV.setText(String.valueOf(currentItem.getSoldPrice()));
         holder.itemQuantityTV.setText(String.valueOf(currentItem.getQuantity()));
         holder.itemPlatformTV.setText(currentItem.getPlatform());
         // find image via path
@@ -47,17 +48,18 @@ public class SoldItemAdapter extends RecyclerView.Adapter<SoldItemAdapter.ItemHo
     }
 
     // Store item data to bind them to their views.
-    class ItemHolder extends RecyclerView.ViewHolder {
+    class SoldItemHolder extends RecyclerView.ViewHolder {
         private TextView itemNameTV;
         private TextView itemInitialPriceTV;
+        private TextView itemSoldPriceTV;
         private TextView itemQuantityTV;
         private TextView itemPlatformTV;
 
-        public ItemHolder(View itemView) {
+        public SoldItemHolder(View itemView) {
             super(itemView);
             itemNameTV = itemView.findViewById(R.id.soldItem_name);
             itemInitialPriceTV = itemView.findViewById(R.id.soldItem_initial_price);
-            itemInitialPriceTV = itemView.findViewById(R.id.soldItem_sold_price);
+            itemSoldPriceTV = itemView.findViewById(R.id.soldItem_sold_price);
             itemQuantityTV = itemView.findViewById(R.id.soldItem_quantity);
             itemPlatformTV = itemView.findViewById(R.id.soldItem_platform);
         }

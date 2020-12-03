@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.flipper_app.R;
 import com.example.flipper_app.model.Item;
+import com.example.flipper_app.model.SoldItem;
 import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.sold.SoldItemViewModel;
 

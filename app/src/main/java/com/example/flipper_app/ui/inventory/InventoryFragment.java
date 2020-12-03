@@ -2,10 +2,11 @@ package com.example.flipper_app.ui.inventory;
 
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,15 +29,24 @@ public class InventoryFragment extends Fragment {
 
     private ItemViewModel itemViewModel;
     private AddItemViewModel addItemViewModel;
+    private ImageButton soldButton;
+    private View item;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-         addItemViewModel =
+        addItemViewModel =
                 new ViewModelProvider(this).get(AddItemViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_inventory, container, false);
+        item = inflater.inflate(R.layout.item, container, false);
 
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        insertNestedFragment();
         // Setup RecyclerView to hold items.
-        final RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
+        final RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
@@ -51,13 +61,6 @@ public class InventoryFragment extends Fragment {
                 adapter.setItems(items);
             }
         });
-
-        return root;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        insertNestedFragment();
     }
 
     private void insertNestedFragment() {
@@ -66,11 +69,11 @@ public class InventoryFragment extends Fragment {
         transaction.replace(R.id.fragment_summary, childFragment).commit();
     }
 
-    public void addToSoldTable(View view){
-        Toast.makeText(getActivity(), "Adding to sold table", Toast.LENGTH_SHORT).show();
-    }
-
-    public static InventoryFragment newInstance(){
+    public static InventoryFragment newInstance() {
         return new InventoryFragment();
     }
+
+    /*public void addToSoldTable(View v) {
+
+    }*/
 }

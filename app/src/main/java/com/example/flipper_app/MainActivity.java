@@ -1,7 +1,9 @@
 package com.example.flipper_app;
 
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.flipper_app.ui.inventory.InventoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +15,15 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity {
 
     AppBarConfiguration appBarConfiguration;
+    //InventoryFragment inventoryFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        //inventoryFragment = InventoryFragment.newInstance();
 
         /**
          * Find the navController (controls which views to display in NavHost) within NavHost
@@ -41,4 +46,8 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    /*public void addToSoldTable(View view) {
+        inventoryFragment.addToSoldTable(view);
+    }*/
 }
