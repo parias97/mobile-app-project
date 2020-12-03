@@ -41,6 +41,7 @@ public class AddItemFragment extends Fragment {
     private EditText itemPlatformET;
     private EditText itemPicPathET;
     private Button saveButton;
+    private Button cancelButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,8 +51,9 @@ public class AddItemFragment extends Fragment {
         itemInitPriceET = root.findViewById(R.id.itemInitPrice);
         itemQuantityET = root.findViewById(R.id.itemQuantity);
         itemPlatformET = root.findViewById(R.id.itemPlatform);
-        itemPicPathET = root.findViewById(R.id.itemPicpath);
+        itemPicPathET = root.findViewById(R.id.itemPicPath.);
         saveButton = root.findViewById(R.id.saveButton);
+        cancelButton = root.findViewById(R.id.cancelButton);
 
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
@@ -61,6 +63,12 @@ public class AddItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 saveButton();
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().popBackStackImmediate();
             }
         });
 

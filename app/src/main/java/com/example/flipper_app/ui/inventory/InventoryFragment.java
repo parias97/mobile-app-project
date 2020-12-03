@@ -21,7 +21,6 @@ import com.example.flipper_app.adapter.ItemAdapter;
 import com.example.flipper_app.model.Item;
 import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.addItem.AddItemViewModel;
-import com.example.flipper_app.ui.summary.SummaryFragment;
 
 import java.util.List;
 
@@ -44,7 +43,6 @@ public class InventoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        insertNestedFragment();
         // Setup RecyclerView to hold items.
         final RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -61,12 +59,6 @@ public class InventoryFragment extends Fragment {
                 adapter.setItems(items);
             }
         });
-    }
-
-    private void insertNestedFragment() {
-        Fragment childFragment = new SummaryFragment();
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_summary, childFragment).commit();
     }
 
     public static InventoryFragment newInstance() {
