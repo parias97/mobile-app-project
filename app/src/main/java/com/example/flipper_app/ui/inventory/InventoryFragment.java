@@ -31,6 +31,7 @@ public class InventoryFragment extends Fragment {
     private AddItemViewModel addItemViewModel;
     private ImageButton soldButton;
     private View item;
+    private ItemAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class InventoryFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
-        final ItemAdapter adapter = new ItemAdapter();
+        adapter = new ItemAdapter();
         recyclerView.setAdapter(adapter);
 
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
@@ -73,7 +74,8 @@ public class InventoryFragment extends Fragment {
         return new InventoryFragment();
     }
 
-    /*public void addToSoldTable(View v) {
-
-    }*/
+    public void addToSoldTable(View v) {
+        //Item item = adapter.getClickedItem();
+        //Log.d("test:", item.getName());
+    }
 }

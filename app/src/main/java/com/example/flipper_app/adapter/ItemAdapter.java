@@ -58,7 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         private TextView itemInitialPriceTV;
         private TextView itemQuantityTV;
         private TextView itemPlatformTV;
-        private ImageButton soldButton;
+        //private ImageButton soldButton;
 
         public ItemHolder(View itemView) {
             super(itemView);
@@ -66,8 +66,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             itemInitialPriceTV = itemView.findViewById(R.id.item_initial_price);
             itemQuantityTV = itemView.findViewById(R.id.item_quantity);
             itemPlatformTV = itemView.findViewById(R.id.item_platform);
-            soldButton = itemView.findViewById(R.id.soldIcon);
-            soldButton.setOnClickListener(this);
+            //soldButton = itemView.findViewById(R.id.soldIcon);
+            //soldButton.setOnClickListener(this);
         }
 
         @Override
