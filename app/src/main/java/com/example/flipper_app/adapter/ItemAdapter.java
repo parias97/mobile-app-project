@@ -8,6 +8,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flipper_app.R;
 import com.example.flipper_app.model.Item;
 import com.example.flipper_app.model.SoldItem;
+import com.example.flipper_app.ui.AddToSoldFragment;
 import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.sold.SoldItemViewModel;
 
@@ -47,6 +51,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
     public int getItemCount() {
         return items.size();
     }
+
     public void setItems(List<Item> items) {
         this.items = items;
         notifyDataSetChanged();
@@ -58,7 +63,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         private TextView itemInitialPriceTV;
         private TextView itemQuantityTV;
         private TextView itemPlatformTV;
-        //private ImageButton soldButton;
+        private ImageButton soldButton;
 
         public ItemHolder(View itemView) {
             super(itemView);
@@ -66,26 +71,35 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             itemInitialPriceTV = itemView.findViewById(R.id.item_initial_price);
             itemQuantityTV = itemView.findViewById(R.id.item_quantity);
             itemPlatformTV = itemView.findViewById(R.id.item_platform);
-            //soldButton = itemView.findViewById(R.id.soldIcon);
-            //soldButton.setOnClickListener(this);
+            soldButton = itemView.findViewById(R.id.soldIcon);
+            soldButton.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            Item item = items.get(getAdapterPosition());
+            Log.d("test", "testing");
+            //AppCompatActivity activity = (AppCompatActivity) view.getContext();
+            FragmentActivity activity = (FragmentActivity) view.getContext();
+            AddToSoldFragment myFragment = new AddToSoldFragment();
+            activity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.homeTab, myFragment)
+                    .addToBackStack(null).commit();
+
+            /*Item item = items.get(getAdapterPosition());
             String itemName = item.getName();
             double initPrice = item.getInitialPrice();
             int quantity = item.getQuantity();
             String platform = item.getPlatform();
             String desc = item.getDesc();
-            String picPath = item.getPicturePath();
+            String picPath = item.getPicturePath();*/
 
-            SoldItem soldItem = new SoldItem(quantity, 3.45);
+            /*SoldItem soldItem = new SoldItem(quantity, 3.45);
             soldItem.setName(itemName);
             soldItem.setPlatform(platform);
             soldItem.setDesc(desc);
             soldItem.setPicturePath(picPath);
-            soldItem.setInitialPrice(initPrice);
+            soldItem.setInitialPrice(initPrice);*/
         }
     }
 }

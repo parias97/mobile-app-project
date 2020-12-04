@@ -98,7 +98,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="50dp"
             android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/sold_ic"
-            android:onClick="addToSoldTable"/>
+            android:src="@drawable/sold_ic"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

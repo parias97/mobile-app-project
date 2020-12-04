@@ -28,5 +28,4 @@
         android:name="com.example.flipper_app.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
-
 </navigation>

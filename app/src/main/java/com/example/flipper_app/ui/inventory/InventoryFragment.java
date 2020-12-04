@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.flipper_app.R;
 import com.example.flipper_app.adapter.ItemAdapter;
 import com.example.flipper_app.model.Item;
+import com.example.flipper_app.ui.AddToSoldFragment;
 import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.addItem.AddItemViewModel;
 

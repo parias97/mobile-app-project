@@ -20,17 +20,6 @@ import com.example.flipper_app.ui.sold.SoldItemViewModel;
 
 public class AddItemFragment extends Fragment {
 
-    public static final String EXTRA_TITLE =
-            "com.example.flipper_app.ui.addItem.EXTRA_TITLE";
-    public static final String EXTRA_INITPRICE =
-            "com.example.flipper_app.ui.addItem.EXTRA_INITPRICE";
-    public static final String EXTRA_QUANTITY =
-            "com.example.flipper_app.ui.addItem.EXTRA_QUANTITY";
-    public static final String EXTRA_PLATFORM =
-            "com.example.flipper_app.ui.addItem.EXTRA_PLATFORM";
-    public static final String EXTRA_PICPATH =
-            "com.example.flipper_app.ui.addItem.EXTRA_PICPATH";
-
     private ItemViewModel itemViewModel;
     private SoldItemViewModel soldItemViewModel;
     private AddItemViewModel addItemViewModel;
@@ -51,7 +40,7 @@ public class AddItemFragment extends Fragment {
         itemInitPriceET = root.findViewById(R.id.itemInitPrice);
         itemQuantityET = root.findViewById(R.id.itemQuantity);
         itemPlatformET = root.findViewById(R.id.itemPlatform);
-        itemPicPathET = root.findViewById(R.id.itemPicPath.);
+        itemPicPathET = root.findViewById(R.id.itemPlatform);
         saveButton = root.findViewById(R.id.saveButton);
         cancelButton = root.findViewById(R.id.cancelButton);
 
@@ -101,6 +90,7 @@ public class AddItemFragment extends Fragment {
         addItemViewModel.setPlatform(platform);
         addItemViewModel.setPicPath(path);
         addItemViewModel.setSaved("true");
+        getFragmentManager().popBackStackImmediate();
     }
 
     private void insertItem(){
