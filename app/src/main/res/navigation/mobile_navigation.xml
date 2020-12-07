@@ -28,4 +28,10 @@
         android:name="com.example.flipper_app.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/navigation_add_to_sold"
+        android:name="com.example.flipper_app.ui.AddToSoldFragment"
+        android:label="@string/title_sold"
+        tools:layout="@layout/fragment_add_to_sold" />
 </navigation>

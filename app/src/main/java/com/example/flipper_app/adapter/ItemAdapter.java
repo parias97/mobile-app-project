@@ -1,6 +1,6 @@
 package com.example.flipper_app.adapter;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,19 +8,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flipper_app.R;
 import com.example.flipper_app.model.Item;
-import com.example.flipper_app.model.SoldItem;
-import com.example.flipper_app.ui.AddToSoldFragment;
-import com.example.flipper_app.ui.ItemViewModel;
-import com.example.flipper_app.ui.sold.SoldItemViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,22 +70,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
         @Override
         public void onClick(View view) {
-            Log.d("test", "testing");
-            //AppCompatActivity activity = (AppCompatActivity) view.getContext();
-            FragmentActivity activity = (FragmentActivity) view.getContext();
-            AddToSoldFragment myFragment = new AddToSoldFragment();
-            activity.getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.homeTab, myFragment)
-                    .addToBackStack(null).commit();
-
-            /*Item item = items.get(getAdapterPosition());
+            Item item = items.get(getAdapterPosition());
             String itemName = item.getName();
             double initPrice = item.getInitialPrice();
             int quantity = item.getQuantity();
             String platform = item.getPlatform();
             String desc = item.getDesc();
-            String picPath = item.getPicturePath();*/
+            String picPath = item.getPicturePath();
+
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.navigation_add_to_sold);
+
 
             /*SoldItem soldItem = new SoldItem(quantity, 3.45);
             soldItem.setName(itemName);
@@ -103,3 +91,4 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         }
     }
 }
+

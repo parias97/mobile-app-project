@@ -13,15 +13,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flipper_app.MainActivity;
 import com.example.flipper_app.R;
 import com.example.flipper_app.adapter.ItemAdapter;
 import com.example.flipper_app.model.Item;
 import com.example.flipper_app.ui.AddToSoldFragment;
 import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.addItem.AddItemViewModel;
+import com.example.flipper_app.ui.home.TabFragment;
 
 import java.util.List;
 
@@ -32,6 +36,8 @@ public class InventoryFragment extends Fragment {
     private ImageButton soldButton;
     private View item;
     private ItemAdapter adapter;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,14 +67,11 @@ public class InventoryFragment extends Fragment {
                 adapter.setItems(items);
             }
         });
+
     }
 
     public static InventoryFragment newInstance() {
         return new InventoryFragment();
     }
 
-    public void addToSoldTable(View v) {
-        //Item item = adapter.getClickedItem();
-        //Log.d("test:", item.getName());
-    }
 }
