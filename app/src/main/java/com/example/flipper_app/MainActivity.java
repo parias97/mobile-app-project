@@ -4,27 +4,32 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.flipper_app.ui.AddToSoldFragment;
 import com.example.flipper_app.ui.inventory.InventoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.flipper_app.model.Item;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager.widget.ViewPager;
+import com.example.flipper_app.adapter.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     AppBarConfiguration appBarConfiguration;
+    ViewPager viewPager;
+    ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
 
         /**
          * Find the navController (controls which views to display in NavHost) within NavHost

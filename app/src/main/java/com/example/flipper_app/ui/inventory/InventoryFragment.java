@@ -37,8 +37,6 @@ public class InventoryFragment extends Fragment {
     private View item;
     private ItemAdapter adapter;
 
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         addItemViewModel =
@@ -69,6 +67,7 @@ public class InventoryFragment extends Fragment {
         });
 
     }
+
 
     public static InventoryFragment newInstance() {
         return new InventoryFragment();

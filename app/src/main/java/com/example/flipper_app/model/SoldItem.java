@@ -18,10 +18,20 @@ public class SoldItem {
     private double profit;
     private boolean isSold;
 
+//
+//    public SoldItem(int quantity, double soldPrice) {
+//        this.quantity = quantity;
+//        this.soldPrice = soldPrice;
+//    }
 
-    public SoldItem(int quantity, double soldPrice) {
+    public SoldItem(String name, String desc, double initialPrice, int quantity, String platform, String picturePath) {
+        this.name = name;
+        this.desc = desc;
+        this.initialPrice = initialPrice;
         this.quantity = quantity;
-        this.soldPrice = soldPrice;
+        this.platform = platform;
+        this.picturePath = picturePath;
+        this.soldPrice = 0;
     }
 
     public void setId(int id) {

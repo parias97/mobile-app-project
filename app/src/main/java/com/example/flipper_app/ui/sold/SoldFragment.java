@@ -29,7 +29,7 @@ import java.util.List;
 
 public class SoldFragment extends Fragment {
 
-    private SoldItemViewModel soldItemViewModel;
+    private ItemViewModel soldItemViewModel;
     private View root;
 
     public static SoldFragment newInstance() {
@@ -47,7 +47,7 @@ public class SoldFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
+        soldItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
         // Setup RecyclerView to hold items.
         final RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
