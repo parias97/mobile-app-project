@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimaryDark">
 
         <ImageView
             android:id="@+id/soldItem_pic"
@@ -35,7 +35,7 @@
             android:layout_toRightOf="@id/soldItem_pic"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Initial Price:"
+            android:text="Initial Price: $"
             android:textColor="#FFFFFF"/>
 
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/soldItem_initial_price_label"
             android:layout_toRightOf="@id/soldItem_pic"
-            android:text="Sold price:"
+            android:text="Sold price: $"
             android:textColor="#FFFFFF"/>
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_toRightOf="@id/soldItem_pic"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Quantity:"
+            android:text="Quantity: "
             android:textColor="#FFFFFF"/>
 
         <TextView
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/soldItem_quantity_label"
             android:layout_toRightOf="@id/soldItem_pic"
-            android:text="Platform:"
+            android:text="Platform: "
             android:textColor="#FFFFFF"/>
 
         <TextView
@@ -102,12 +102,13 @@
             android:layout_toRightOf="@id/soldItem_platform_label"
             android:textColor="#FFFFFF"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/deleteIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@drawable/delete_ic" />
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/favorite_ic" />
 
         <ImageButton
             android:id="@+id/relistIcon"

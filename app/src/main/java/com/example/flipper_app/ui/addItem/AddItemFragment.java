@@ -21,8 +21,8 @@ import com.example.flipper_app.ui.sold.SoldItemViewModel;
 public class AddItemFragment extends Fragment {
 
     private ItemViewModel itemViewModel;
-    private SoldItemViewModel soldItemViewModel;
     private AddItemViewModel addItemViewModel;
+    private Item item;
     private EditText itemNameET;
     private EditText itemDescET;
     private EditText itemInitPriceET;
@@ -45,7 +45,6 @@ public class AddItemFragment extends Fragment {
         cancelButton = root.findViewById(R.id.cancelButton);
 
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        soldItemViewModel = new ViewModelProvider(this).get(SoldItemViewModel.class);
         addItemViewModel = new ViewModelProvider(this).get(AddItemViewModel.class);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +70,6 @@ public class AddItemFragment extends Fragment {
                 }
             }
         });
-
         return root;
     }
 
@@ -90,6 +88,7 @@ public class AddItemFragment extends Fragment {
         addItemViewModel.setPlatform(platform);
         addItemViewModel.setPicPath(path);
         addItemViewModel.setSaved("true");
+
         getFragmentManager().popBackStackImmediate();
     }
 
@@ -101,7 +100,7 @@ public class AddItemFragment extends Fragment {
         String platform = addItemViewModel.getPlatform();
         String picpath = addItemViewModel.getPicPath();
 
-        Item item = new Item(title, desc, initPrice, quantity, platform, picpath, false);
+        item = new Item(title, desc, initPrice, quantity, platform, picpath, false);
         itemViewModel.insert(item);
     }
 }

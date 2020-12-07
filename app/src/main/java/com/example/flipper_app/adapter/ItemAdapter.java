@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStore;
 import androidx.lifecycle.ViewModelStoreOwner;
@@ -28,10 +29,8 @@ import com.example.flipper_app.model.SoldItem;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
-
     private List<Item> items = new ArrayList<>();
     public static SoldItem autofill;
-
 
     @NonNull
     @Override
@@ -61,6 +60,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         notifyDataSetChanged();
     }
 
+    public void deleteItemAt(int position){
+        items.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, items.size());
+    }
 
     // Store item data to bind them to their views.
     class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -91,13 +95,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             String picPath = item.getPicturePath();
 
             autofill = new SoldItem(itemName, desc, initPrice, quantity, platform, picPath);
-
-
-
+            deleteItemAt(getAdapterPosition());
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.navigation_add_to_sold);
-
-
 
             /*SoldItem soldItem = new SoldItem(quantity, 3.45);
             soldItem.setName(itemName);

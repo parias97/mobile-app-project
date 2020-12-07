@@ -31,7 +31,6 @@ public class SoldItem {
         this.quantity = quantity;
         this.platform = platform;
         this.picturePath = picturePath;
-        this.soldPrice = 0;
     }
 
     public void setId(int id) {

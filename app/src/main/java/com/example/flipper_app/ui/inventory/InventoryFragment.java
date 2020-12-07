@@ -65,9 +65,7 @@ public class InventoryFragment extends Fragment {
                 adapter.setItems(items);
             }
         });
-
     }
-
 
     public static InventoryFragment newInstance() {
         return new InventoryFragment();
