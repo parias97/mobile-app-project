@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Item.class, SoldItem.class}, version = 1)
+@Database(entities = {Item.class, SoldItem.class, FavoriteItem.class}, version = 1)
 public abstract class ItemDatabase extends RoomDatabase {
 
     private static ItemDatabase instance;
@@ -17,6 +17,8 @@ public abstract class ItemDatabase extends RoomDatabase {
     public abstract ItemDao itemDao();
 
     public abstract SoldItemDao soldItemDao();
+
+    public abstract FavoriteItemDao favoriteItemDao();
 
     /* Create an ItemDatabase singleton. Only one database is needed.
      * This method is synchronized to prevent multiple threads from
@@ -45,9 +47,12 @@ public abstract class ItemDatabase extends RoomDatabase {
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private ItemDao itemDao;
         private SoldItemDao soldItemDao;
+        private FavoriteItemDao favoriteItemDao;
+
         private PopulateDbAsyncTask(ItemDatabase db) {
             itemDao = db.itemDao();
             soldItemDao = db.soldItemDao();
+            favoriteItemDao = db.favoriteItemDao();
         }
         @Override
         protected Void doInBackground(Void... voids) {

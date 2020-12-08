@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/sold_cardview"
+    android:id="@+id/favoriteItem_cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
@@ -15,24 +15,24 @@
         android:background="@color/colorPrimaryDark">
 
         <ImageView
-            android:id="@+id/soldItem_pic"
+            android:id="@+id/favoriteItem_pic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_search_24"/>
 
         <TextView
-            android:id="@+id/soldItem_name"
+            android:id="@+id/favoriteItem_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/soldItem_pic"
+            android:layout_toRightOf="@id/favoriteItem_pic"
             android:textColor="#FFFFFF"/>
 
         <TextView
-            android:id="@+id/soldItem_initial_price_label"
+            android:id="@+id/favoriteItem_initial_price_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/soldItem_name"
-            android:layout_toRightOf="@id/soldItem_pic"
+            android:layout_below="@id/favoriteItem_name"
+            android:layout_toRightOf="@id/favoriteItem_pic"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Initial Price: $"
@@ -40,70 +40,34 @@
 
 
         <TextView
-            android:id="@+id/soldItem_initial_price"
+            android:id="@+id/favoriteItem_initial_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/soldItem_name"
-            android:layout_toRightOf="@id/soldItem_initial_price_label"
+            android:layout_below="@id/favoriteItem_name"
+            android:layout_toRightOf="@id/favoriteItem_initial_price_label"
             android:ellipsize="end"
             android:textColor="#FFFFFF" />
 
         <TextView
-            android:id="@+id/soldItem_sold_price_label"
+            android:id="@+id/favoriteItem_sold_price_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/soldItem_initial_price_label"
-            android:layout_toRightOf="@id/soldItem_pic"
+            android:layout_below="@id/favoriteItem_initial_price_label"
+            android:layout_toRightOf="@id/favoriteItem_pic"
             android:text="Sold price: $"
             android:textColor="#FFFFFF"/>
 
         <TextView
-            android:id="@+id/soldItem_sold_price"
+            android:id="@+id/favoriteItem_sold_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/soldItem_initial_price_label"
-            android:layout_toRightOf="@id/soldItem_sold_price_label"
+            android:layout_below="@id/favoriteItem_initial_price_label"
+            android:layout_toRightOf="@id/favoriteItem_sold_price_label"
             android:ellipsize="end"
             android:textColor="#FFFFFF" />
 
-        <TextView
-            android:id="@+id/soldItem_quantity_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/soldItem_sold_price_label"
-            android:layout_toRightOf="@id/soldItem_pic"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="Quantity: "
-            android:textColor="#FFFFFF"/>
-
-        <TextView
-            android:id="@+id/soldItem_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/soldItem_sold_price_label"
-            android:layout_toRightOf="@id/soldItem_quantity_label"
-            android:textColor="#FFFFFF"/>
-
-        <TextView
-            android:id="@+id/soldItem_platform_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/soldItem_quantity_label"
-            android:layout_toRightOf="@id/soldItem_pic"
-            android:text="Platform: "
-            android:textColor="#FFFFFF"/>
-
-        <TextView
-            android:id="@+id/soldItem_platform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/soldItem_quantity"
-            android:layout_toRightOf="@id/soldItem_platform_label"
-            android:textColor="#FFFFFF"/>
-
         <ImageButton
-            android:id="@+id/favoriteIcon"
+            android:id="@+id/deleteIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

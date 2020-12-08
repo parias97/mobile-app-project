@@ -47,16 +47,15 @@ public class SoldFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        soldItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-
         // Setup RecyclerView to hold items.
         final RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
-        final SoldItemAdapter adapter = new SoldItemAdapter();
+        final SoldItemAdapter adapter = new SoldItemAdapter(getActivity());
         recyclerView.setAdapter(adapter);
 
+        soldItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         soldItemViewModel.getAllSoldItems().observe(getViewLifecycleOwner(), new Observer<List<SoldItem>>() {
             @Override
             public void onChanged(@Nullable List<SoldItem> soldItems) {
