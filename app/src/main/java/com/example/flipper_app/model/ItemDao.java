@@ -26,4 +26,11 @@ public interface ItemDao {
 
     @Query("SELECT * FROM item_table")
     LiveData<List<Item>> getAllItems();
+
+    @Query("SELECT * FROM item_table WHERE id == :id")
+    public abstract Item getItem(int id);
+
+    @Update
+    public abstract int updateItem(Item item);
+
 }

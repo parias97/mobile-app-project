@@ -2,6 +2,8 @@ package com.example.flipper_app.model;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import com.example.flipper_app.adapter.ItemAdapter;
+
 
 import androidx.lifecycle.LiveData;
 
@@ -10,7 +12,9 @@ import java.util.List;
 public class ItemRepository {
 
     private ItemDao itemDao;
+    public static Item getItemItem;
     private LiveData<List<Item>> allItems;
+    private int id;
 
     public ItemRepository(Application application){
         ItemDatabase database = ItemDatabase.getInstance(application);
@@ -38,7 +42,11 @@ public class ItemRepository {
     public LiveData<List<Item>> getAllItems() {
         return allItems;
     }
+
+    public Item getItem(int id) { return getItemItem; }
+
     // Allow these operations to run in the background.
+
     private static class InsertItemAsyncTask extends AsyncTask<Item, Void, Void> {
         private ItemDao itemDao;
         private InsertItemAsyncTask(ItemDao itemDao) {
@@ -47,6 +55,18 @@ public class ItemRepository {
         @Override
         protected Void doInBackground(Item... items) {
             itemDao.insert(items[0]);
+            return null;
+        }
+    }
+
+    private static class GetItemHelperAsyncTask extends AsyncTask<Item, Void, Void> {
+        private ItemDao itemDao;
+        private GetItemHelperAsyncTask(ItemDao itemDao) {
+            this.itemDao = itemDao;
+        }
+        @Override
+        protected Void doInBackground(Item... items) {
+            getItemItem = itemDao.getItem(getItemItem.getId());
             return null;
         }
     }

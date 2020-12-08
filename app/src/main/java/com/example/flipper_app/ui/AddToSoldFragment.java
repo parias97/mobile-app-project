@@ -68,6 +68,9 @@ public class AddToSoldFragment extends Fragment {
         saveButton = root.findViewById(R.id.saveButton);
         cancelButton = root.findViewById(R.id.cancelButton);
 
+//        getItem(autofill.getId())
+
+
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -91,6 +94,12 @@ public class AddToSoldFragment extends Fragment {
                  * the item from the inventory database.
                  */
                 if(s == "true"){
+                    if(Integer.parseInt(itemQuantityET.getText().toString()) >= ItemAdapter.autofill.getQuantity())
+                        removeFromInventory();
+                    else{
+                        String w = itemViewModel.getItem(ItemAdapter.autofill.getId()).getName();
+                        Log.d("item name", w);
+                    }
                     insertItem();
                     // todo: get item clicked on to delete item from database
                     addToSoldViewModel.setSaved("false");
@@ -128,6 +137,23 @@ public class AddToSoldFragment extends Fragment {
         int quantity = addToSoldViewModel.getQuantity();
         String platform = addToSoldViewModel.getPlatform();
         String picpath = addToSoldViewModel.getPicPath();
+
+        SoldItem item = new SoldItem(title, desc, initPrice,  quantity, platform, picpath);
+        item.setSoldPrice(soldPrice);
+        soldItemViewModel.insert(item);
+    }
+
+    private void removeFromInventory(){
+
+        String title = addToSoldViewModel.getItemName();
+        String desc = addToSoldViewModel.getDesc();
+        double initPrice = addToSoldViewModel.getInitPrice();
+        double soldPrice = addToSoldViewModel.getSoldPrice();
+        int quantity = addToSoldViewModel.getQuantity();
+        String platform = addToSoldViewModel.getPlatform();
+        String picpath = addToSoldViewModel.getPicPath();
+
+
 
         SoldItem item = new SoldItem(title, desc, initPrice,  quantity, platform, picpath);
         item.setSoldPrice(soldPrice);

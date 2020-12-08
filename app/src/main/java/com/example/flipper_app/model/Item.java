@@ -1,6 +1,7 @@
 package com.example.flipper_app.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "item_table")
@@ -12,7 +13,7 @@ public class Item {
     private String name;
     private String desc;
     private double initialPrice;
-    private int quantity;
+    protected int quantity;
     private String platform;
     private String picturePath;
     private boolean isSold;
@@ -26,6 +27,18 @@ public class Item {
         this.platform = platform;
         this.picturePath = picturePath;
         this.isSold = isSold;
+    }
+
+    @Ignore
+    public Item(int id, String name, String desc, double initialPrice, int quantity, String platform, String picturePath, boolean isSold) {
+        this.name = name;
+        this.desc = desc;
+        this.initialPrice = initialPrice;
+        this.quantity = quantity;
+        this.platform = platform;
+        this.picturePath = picturePath;
+        this.isSold = isSold;
+        this.id = id;
     }
 
     public void setId(int id) {

@@ -2,6 +2,7 @@ package com.example.flipper_app.adapter;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ import com.example.flipper_app.model.SoldItem;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
     private List<Item> items = new ArrayList<>();
-    public static SoldItem autofill;
+    public static Item autofill;
 
     @NonNull
     @Override
@@ -94,8 +95,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             String desc = item.getDesc();
             String picPath = item.getPicturePath();
 
-            autofill = new SoldItem(itemName, desc, initPrice, quantity, platform, picPath);
-            deleteItemAt(getAdapterPosition());
+            autofill = new Item(item.getId(), itemName, desc, initPrice, quantity, platform, picPath, true);
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.navigation_add_to_sold);
 

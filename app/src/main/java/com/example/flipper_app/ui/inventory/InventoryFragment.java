@@ -58,7 +58,6 @@ public class InventoryFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-
         itemViewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
             @Override
             public void onChanged(@Nullable List<Item> items) {
