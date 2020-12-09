@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
@@ -26,6 +27,7 @@ import com.example.flipper_app.ui.AddToSoldFragment;
 import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.addItem.AddItemViewModel;
 import com.example.flipper_app.ui.home.TabFragment;
+import com.example.flipper_app.ui.sold.SoldItemViewModel;
 
 import java.util.List;
 
@@ -33,15 +35,21 @@ public class InventoryFragment extends Fragment {
 
     private ItemViewModel itemViewModel;
     private AddItemViewModel addItemViewModel;
+    private SoldItemViewModel soldItemViewModel;
     private ImageButton soldButton;
     private View item;
+    private TextView profit;
+    private double totalProf = 0;
     private ItemAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         addItemViewModel =
                 new ViewModelProvider(this).get(AddItemViewModel.class);
+        soldItemViewModel =
+                new ViewModelProvider(this).get(SoldItemViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_inventory, container, false);
+        profit = root.findViewById(R.id.profit);
         item = inflater.inflate(R.layout.item, container, false);
 
         return root;
@@ -64,6 +72,10 @@ public class InventoryFragment extends Fragment {
                 adapter.setItems(items);
             }
         });
+
+        profit.setText(String.valueOf(soldItemViewModel.totalProf));
+        Log.d("profit", String.valueOf(soldItemViewModel.totalProf));
+
     }
 
     public static InventoryFragment newInstance() {

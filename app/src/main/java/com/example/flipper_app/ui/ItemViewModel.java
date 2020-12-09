@@ -25,6 +25,8 @@ public class ItemViewModel extends AndroidViewModel {
     private LiveData<List<SoldItem>> allSoldItems;
     private LiveData<List<FavoriteItem>> allFavoriteItems;
 
+    public double totalProf = 0;
+
     public ItemViewModel(@NonNull Application application) {
         super(application);
         repository = new ItemRepository(application);
@@ -57,7 +59,7 @@ public class ItemViewModel extends AndroidViewModel {
     }
 
     public void insert(SoldItem item) {
-        repository2.insert(item);
+        totalProf += item.getQuantity()*(item.getSoldPrice() - item.getInitialPrice()); repository2.insert(item);
     }
     public void update(SoldItem item) {
         repository2.update(item);

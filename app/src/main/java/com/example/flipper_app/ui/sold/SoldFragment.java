@@ -56,11 +56,13 @@ public class SoldFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         soldItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+
         soldItemViewModel.getAllSoldItems().observe(getViewLifecycleOwner(), new Observer<List<SoldItem>>() {
             @Override
             public void onChanged(@Nullable List<SoldItem> soldItems) {
                 adapter.setItems(soldItems);
             }
         });
+
     }
 }

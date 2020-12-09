@@ -110,7 +110,7 @@ public class AddToSoldFragment extends Fragment {
     private void saveButton(){
         String title = itemNameET.getText().toString();
         String desc = itemDescET.getText().toString();
-        double initPrice = Double.parseDouble(itemInitPriceET.getText().toString());
+        double initPrice = ItemAdapter.autofill.getInitialPrice();
         // create an edittext view for the sold price and get the value
         double soldPrice = Double.parseDouble(itemSoldPriceET.getText().toString());
         int itemQuantity = Integer.parseInt(itemQuantityET.getText().toString());
@@ -137,47 +137,18 @@ public class AddToSoldFragment extends Fragment {
         String platform = addToSoldViewModel.getPlatform();
         String picpath = addToSoldViewModel.getPicPath();
 
-        SoldItem item = new SoldItem(title, desc, initPrice,  quantity, platform, picpath);
-        item.setSoldPrice(soldPrice);
+        SoldItem item = new SoldItem(title, desc, soldPrice,  quantity, platform, picpath);
+        item.setInitialPrice(initPrice);
         soldItemViewModel.insert(item);
     }
 
     private void updateInventory(){
-
-        String title = addToSoldViewModel.getItemName();
-        String desc = addToSoldViewModel.getDesc();
-        double initPrice = addToSoldViewModel.getInitPrice();
-        double soldPrice = addToSoldViewModel.getSoldPrice();
-        int quantity = addToSoldViewModel.getQuantity();
-        String platform = addToSoldViewModel.getPlatform();
-        String picpath = addToSoldViewModel.getPicPath();
-
-
-
-        SoldItem item = new SoldItem(title, desc, initPrice,  quantity, platform, picpath);
-        item.setSoldPrice(soldPrice);
-        soldItemViewModel.insert(item);
         itemViewModel.delete(ItemAdapter.autofill);
         itemViewModel.insert(new Item(ItemAdapter.autofill.getName(), ItemAdapter.autofill.getDesc(), ItemAdapter.autofill.getInitialPrice(), ItemAdapter.autofill.getQuantity() - Integer.parseInt(itemQuantityET.getText().toString()),ItemAdapter.autofill.getPlatform(), ItemAdapter.autofill.getPicturePath(), true));
-
     }
 
 
     private void removeFromInventory(){
-
-        String title = addToSoldViewModel.getItemName();
-        String desc = addToSoldViewModel.getDesc();
-        double initPrice = addToSoldViewModel.getInitPrice();
-        double soldPrice = addToSoldViewModel.getSoldPrice();
-        int quantity = addToSoldViewModel.getQuantity();
-        String platform = addToSoldViewModel.getPlatform();
-        String picpath = addToSoldViewModel.getPicPath();
-
-
-
-        SoldItem item = new SoldItem(title, desc, initPrice,  quantity, platform, picpath);
-        item.setSoldPrice(soldPrice);
-        soldItemViewModel.insert(item);
         itemViewModel.delete(ItemAdapter.autofill);
     }
 

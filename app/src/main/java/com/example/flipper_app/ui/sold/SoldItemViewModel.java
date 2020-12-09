@@ -12,17 +12,20 @@ import java.util.List;
 
 public class SoldItemViewModel extends AndroidViewModel {
 
-    private SoldItemRepository repository;
+    public SoldItemRepository repository;
     private LiveData<List<SoldItem>> allSoldItems;
+    public double totalProf = 0;
 
     public SoldItemViewModel(@NonNull Application application) {
         super(application);
         repository = new SoldItemRepository(application);
+        totalProf = repository.totalProf;
         allSoldItems = repository.getAllSoldItems();
     }
     public void insert(SoldItem item) {
         repository.insert(item);
     }
+
     public void update(SoldItem item) {
         repository.update(item);
     }
