@@ -137,8 +137,7 @@ public class AddToSoldFragment extends Fragment {
         String platform = addToSoldViewModel.getPlatform();
         String picpath = addToSoldViewModel.getPicPath();
 
-        SoldItem item = new SoldItem(title, desc, soldPrice,  quantity, platform, picpath);
-        item.setInitialPrice(initPrice);
+        SoldItem item = new SoldItem(title, desc, initPrice, soldPrice,  quantity, platform, picpath);
         soldItemViewModel.insert(item);
     }
 

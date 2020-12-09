@@ -24,13 +24,16 @@ public class SoldItem {
 //        this.soldPrice = soldPrice;
 //    }
 
-    public SoldItem(String name, String desc, double soldPrice, int quantity, String platform, String picturePath) {
+    public SoldItem(String name, String desc, double initialPrice, double soldPrice, int quantity, String platform, String picturePath) {
         this.name = name;
         this.desc = desc;
+        this.initialPrice = initialPrice;
         this.soldPrice = soldPrice;
         this.quantity = quantity;
         this.platform = platform;
         this.picturePath = picturePath;
+        profit =  quantity*(soldPrice - initialPrice);
+        isSold = true;
     }
 
     public void setId(int id) {

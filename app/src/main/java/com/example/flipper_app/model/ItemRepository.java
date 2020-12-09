@@ -4,7 +4,9 @@ import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.flipper_app.MainActivity;
 import com.example.flipper_app.adapter.ItemAdapter;
+import com.example.flipper_app.ui.inventory.InventoryFragment;
 
 
 import androidx.lifecycle.LiveData;
@@ -27,6 +29,11 @@ public class ItemRepository {
     // Methods to operate on database.
     public void insert(Item item) {
         new InsertItemAsyncTask(itemDao).execute(item);
+        getCount();
+    }
+
+    public void getCount() {
+        new GetCountAsyncTask(itemDao).execute();
     }
 
     public void update(Item item) {
@@ -58,6 +65,26 @@ public class ItemRepository {
         protected Void doInBackground(Item... items) {
             itemDao.insert(items[0]);
             return null;
+        }
+    }
+
+    private static class GetCountAsyncTask extends AsyncTask<Item, Void, Void> {
+        private ItemDao itemDao;
+        int count = 0;
+        private GetCountAsyncTask(ItemDao itemDao) {
+            this.itemDao = itemDao;
+        }
+        @Override
+        protected Void doInBackground(Item... items) {
+            count = itemDao.getCount();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            MainActivity.listed = count;
+            InventoryFragment.update();
         }
     }
 

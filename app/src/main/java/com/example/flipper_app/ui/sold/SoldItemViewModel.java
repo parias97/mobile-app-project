@@ -26,6 +26,10 @@ public class SoldItemViewModel extends AndroidViewModel {
         repository.insert(item);
     }
 
+    public void getCount() {
+        repository.getCount();
+    }
+
     public void update(SoldItem item) {
         repository.update(item);
     }

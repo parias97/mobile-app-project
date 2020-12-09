@@ -24,8 +24,11 @@ public interface SoldItemDao {
     @Query("DELETE FROM sold_table")
     void deleteAllSoldItems();
 
-    @Query("SELECT SUM(profit) FROM sold_table\n")
+    @Query("SELECT SUM(profit) FROM sold_table")
     double getProfit();
+
+    @Query("SELECT SUM(quantity) FROM sold_table")
+    int getCount();
 
     @Query("SELECT * FROM sold_table")
     LiveData<List<SoldItem>> getAllSoldItems();

@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navView;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
+    public static double profit = 0;
+    public static int sold = 0;
+    public static int listed = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -4,8 +4,12 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import android.util.Log;
+import com.example.flipper_app.MainActivity;
 
 import java.util.List;
+
+import com.example.flipper_app.ui.inventory.InventoryFragment;
 
 public class SoldItemRepository {
 
@@ -20,11 +24,12 @@ public class SoldItemRepository {
         getProfit();
     }
 
-    // Methods to operate on database.
-    public void insert(SoldItem item) {
-        totalProf += item.getProfit();
-        new InsertSoldItemAsyncTask(soldItemDao).execute(item);
-    }
+        public void insert(SoldItem item) {
+            new InsertSoldItemAsyncTask(soldItemDao).execute(item);
+            totalProf += getProfit();
+            Log.d("inserted profit", String.valueOf(totalProf));
+            getCount();
+        }
 
     public void update(SoldItem item) {
         new UpdateSoldItemAsyncTask(soldItemDao).execute(item);
@@ -34,11 +39,23 @@ public class SoldItemRepository {
         new DeleteSoldItemAsyncTask(soldItemDao).execute(item);
     }
 
+    public void getCount() {
+        new SoldItemRepository.GetCountAsyncTask(soldItemDao).execute();
+    }
+
     public void deleteAllSoldItems() {
         new DeleteAllSoldItemsAsyncTask(soldItemDao).execute();
     }
 
-    public void getProfit() { new GetProfitAsyncTask(soldItemDao).execute(); }
+    public double getProfit() {
+        double profit = 0.0;
+        GetProfitAsyncTask getProfitAsyncTask = new GetProfitAsyncTask(soldItemDao);
+        getProfitAsyncTask.execute();
+        profit = getProfitAsyncTask.profit;
+        Log.d("get profit", String.valueOf(profit));
+
+        return profit;
+    }
 
     public LiveData<List<SoldItem>> getAllSoldItems() {
         return allSoldItems;
@@ -52,21 +69,51 @@ public class SoldItemRepository {
         }
         @Override
         protected Void doInBackground(SoldItem... items) {
-            totalProf = soldItemDao.getProfit();
+            soldItemDao.insert(items[0]);
             return null;
         }
     }
 
-    // Allow these operations to run in the background.
     private static class GetProfitAsyncTask extends AsyncTask<SoldItem, Void, Void> {
         private SoldItemDao soldItemDao;
+        private double profit;
+
         private GetProfitAsyncTask(SoldItemDao soldItemDao) {
             this.soldItemDao = soldItemDao;
         }
         @Override
         protected Void doInBackground(SoldItem... items) {
-            soldItemDao.insert(items[0]);
+            profit = soldItemDao.getProfit();
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            MainActivity.profit = profit;
+            InventoryFragment.update();
+            totalProf = profit;
+            Log.d("testing onpost", String.valueOf(totalProf));
+        }
+
+    }
+
+    private static class GetCountAsyncTask extends AsyncTask<Item, Void, Void> {
+        private SoldItemDao soldItemDao;
+        int count = 0;
+        private GetCountAsyncTask(SoldItemDao soldItemDao) {
+            this.soldItemDao = soldItemDao;
+        }
+        @Override
+        protected Void doInBackground(Item... items) {
+            count = soldItemDao.getCount();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            MainActivity.sold = count;
+            InventoryFragment.update();
         }
     }
 

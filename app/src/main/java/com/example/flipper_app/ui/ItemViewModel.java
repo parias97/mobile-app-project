@@ -58,6 +58,10 @@ public class ItemViewModel extends AndroidViewModel {
         return allItems;
     }
 
+    public void getCount() {
+        repository.getCount();
+    }
+
     public void insert(SoldItem item) {
         totalProf += item.getQuantity()*(item.getSoldPrice() - item.getInitialPrice()); repository2.insert(item);
     }

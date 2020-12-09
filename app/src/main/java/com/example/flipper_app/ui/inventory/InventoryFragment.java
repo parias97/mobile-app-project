@@ -38,7 +38,9 @@ public class InventoryFragment extends Fragment {
     private SoldItemViewModel soldItemViewModel;
     private ImageButton soldButton;
     private View item;
-    private TextView profit;
+    private static TextView profit;
+    private static TextView listed;
+    private static TextView sold;
     private double totalProf = 0;
     private ItemAdapter adapter;
 
@@ -50,7 +52,10 @@ public class InventoryFragment extends Fragment {
                 new ViewModelProvider(this).get(SoldItemViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_inventory, container, false);
         profit = root.findViewById(R.id.profit);
+        listed = root.findViewById(R.id.listed);
+        sold = root.findViewById(R.id.sold);
         item = inflater.inflate(R.layout.item, container, false);
+
 
         return root;
     }
@@ -73,9 +78,21 @@ public class InventoryFragment extends Fragment {
             }
         });
 
-        profit.setText(String.valueOf(soldItemViewModel.totalProf));
+        itemViewModel.getCount();
+        soldItemViewModel.getCount();
+
+        profit.setText(String.valueOf(MainActivity.profit));
+        sold.setText(String.valueOf(MainActivity.sold));
+        listed.setText(String.valueOf(MainActivity.listed));
+
         Log.d("profit", String.valueOf(soldItemViewModel.totalProf));
 
+    }
+
+    public static void update(){
+        profit.setText(String.valueOf(MainActivity.profit));
+        listed.setText(String.valueOf(MainActivity.listed));
+        sold.setText(String.valueOf(MainActivity.sold));
     }
 
     public static InventoryFragment newInstance() {
