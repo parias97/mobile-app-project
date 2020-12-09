@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:translationY="20dp"
-        app:itemIconTint="@color/navIconColor"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
         app:itemTextColor="@color/navTextColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -2,6 +2,14 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Gives illusion of a cleared menu. By default Bottom Nav. Bar
+        selects an item.
+         Idea source: https://stackoverflow.com/questions/41372293/bottomnavigationview-how-to-uncheck-all-menuitems-and-keep-titles-being-displa-->
+    <item
+        android:id="@+id/hiddenItem"
+        android:visible="false"
+        tools:ignore="MenuTitle" />
+    <!-- Bottom navigation bar menu items -->
     <item
         android:id="@+id/navigation_search"
         android:icon="@drawable/ic_baseline_search_24"
