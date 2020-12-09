@@ -49,7 +49,7 @@ public class ItemViewModel extends AndroidViewModel {
         repository.deleteAllItems();
     }
     public Item getItem(int id) {
-        return repository.getItem(id);
+        repository.id = id; return repository.getItem(id);
     }
 
     public LiveData<List<Item>> getAllItems() {

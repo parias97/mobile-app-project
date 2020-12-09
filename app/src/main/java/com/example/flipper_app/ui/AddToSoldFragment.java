@@ -97,8 +97,7 @@ public class AddToSoldFragment extends Fragment {
                     if(Integer.parseInt(itemQuantityET.getText().toString()) >= ItemAdapter.autofill.getQuantity())
                         removeFromInventory();
                     else{
-                        String w = itemViewModel.getItem(ItemAdapter.autofill.getId()).getName();
-                        Log.d("item name", w);
+                        updateInventory();
                     }
                     insertItem();
                     // todo: get item clicked on to delete item from database
@@ -143,6 +142,27 @@ public class AddToSoldFragment extends Fragment {
         soldItemViewModel.insert(item);
     }
 
+    private void updateInventory(){
+
+        String title = addToSoldViewModel.getItemName();
+        String desc = addToSoldViewModel.getDesc();
+        double initPrice = addToSoldViewModel.getInitPrice();
+        double soldPrice = addToSoldViewModel.getSoldPrice();
+        int quantity = addToSoldViewModel.getQuantity();
+        String platform = addToSoldViewModel.getPlatform();
+        String picpath = addToSoldViewModel.getPicPath();
+
+
+
+        SoldItem item = new SoldItem(title, desc, initPrice,  quantity, platform, picpath);
+        item.setSoldPrice(soldPrice);
+        soldItemViewModel.insert(item);
+        itemViewModel.delete(ItemAdapter.autofill);
+        itemViewModel.insert(new Item(ItemAdapter.autofill.getName(), ItemAdapter.autofill.getDesc(), ItemAdapter.autofill.getInitialPrice(), ItemAdapter.autofill.getQuantity() - Integer.parseInt(itemQuantityET.getText().toString()),ItemAdapter.autofill.getPlatform(), ItemAdapter.autofill.getPicturePath(), true));
+
+    }
+
+
     private void removeFromInventory(){
 
         String title = addToSoldViewModel.getItemName();
@@ -158,6 +178,7 @@ public class AddToSoldFragment extends Fragment {
         SoldItem item = new SoldItem(title, desc, initPrice,  quantity, platform, picpath);
         item.setSoldPrice(soldPrice);
         soldItemViewModel.insert(item);
+        itemViewModel.delete(ItemAdapter.autofill);
     }
 
 
