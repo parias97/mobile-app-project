@@ -18,12 +18,6 @@ public class SoldItem {
     private double profit;
     private boolean isSold;
 
-//
-//    public SoldItem(int quantity, double soldPrice) {
-//        this.quantity = quantity;
-//        this.soldPrice = soldPrice;
-//    }
-
     public SoldItem(String name, String desc, double initialPrice, double soldPrice, int quantity, String platform, String picturePath) {
         this.name = name;
         this.desc = desc;

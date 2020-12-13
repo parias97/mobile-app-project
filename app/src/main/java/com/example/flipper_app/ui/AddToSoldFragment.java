@@ -1,5 +1,7 @@
 package com.example.flipper_app.ui;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +27,8 @@ import com.example.flipper_app.ui.sold.SoldItemViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.example.flipper_app.adapter.ItemAdapter;
 
+import java.io.File;
+
 
 public class AddToSoldFragment extends Fragment {
 
@@ -33,6 +38,8 @@ public class AddToSoldFragment extends Fragment {
     TextInputEditText itemSoldPriceET;
     TextInputEditText itemQuantityET;
     TextInputEditText itemPlatformET;
+    ImageView itemImageView;
+    private File imgFile;
     private Button saveButton;
     private Button cancelButton;
     private AddToSoldViewModel addToSoldViewModel;
@@ -53,23 +60,29 @@ public class AddToSoldFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Get the references to each view in fragment_add_to_sold.xml.
         itemNameET = getActivity().findViewById(R.id.itemName);
         itemDescET = getActivity().findViewById(R.id.itemDesc);
         itemInitPriceET = getActivity().findViewById(R.id.itemInitPrice);
         itemSoldPriceET = getActivity().findViewById(R.id.itemSoldPrice);
         itemQuantityET = getActivity().findViewById(R.id.itemQuantity);
         itemPlatformET = getActivity().findViewById(R.id.itemPlatform);
+        itemImageView = getActivity().findViewById(R.id.itemPicPath);
+        // Fill the views with values from the inventory item that was clicked.
         itemNameET.setText(ItemAdapter.autofill.getName());
         itemDescET.setText(ItemAdapter.autofill.getDesc());
         itemInitPriceET.setText(String.valueOf(ItemAdapter.autofill.getInitialPrice()));
         itemQuantityET.setText(String.valueOf(ItemAdapter.autofill.getQuantity()));
         itemPlatformET.setText(ItemAdapter.autofill.getPlatform());
+        imgFile = new File(ItemAdapter.autofill.getPicturePath());
+
+        if(imgFile.exists()) {
+            Bitmap imageBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            itemImageView.setImageBitmap(imageBitmap);
+        }
 
         saveButton = root.findViewById(R.id.saveButton);
         cancelButton = root.findViewById(R.id.cancelButton);
-
-//        getItem(autofill.getId())
-
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
@@ -100,22 +113,25 @@ public class AddToSoldFragment extends Fragment {
                         updateInventory();
                     }
                     insertItem();
-                    // todo: get item clicked on to delete item from database
                     addToSoldViewModel.setSaved("false");
                 }
             }
         });
     }
 
+    // Save all of the user input into variables to add to the addToSoldViewModel so we can access
+    // these values where needed.
     private void saveButton(){
         String title = itemNameET.getText().toString();
         String desc = itemDescET.getText().toString();
         double initPrice = ItemAdapter.autofill.getInitialPrice();
-        // create an edittext view for the sold price and get the value
         double soldPrice = Double.parseDouble(itemSoldPriceET.getText().toString());
         int itemQuantity = Integer.parseInt(itemQuantityET.getText().toString());
         String platform = itemPlatformET.getText().toString();
-        String path = "./someplace_placeholder";
+        String path = "";
+        if(imgFile.exists()) {
+            path = imgFile.getAbsolutePath();
+        }
 
         addToSoldViewModel.setItemName(title);
         addToSoldViewModel.setDesc(desc);
@@ -146,11 +162,9 @@ public class AddToSoldFragment extends Fragment {
         itemViewModel.insert(new Item(ItemAdapter.autofill.getName(), ItemAdapter.autofill.getDesc(), ItemAdapter.autofill.getInitialPrice(), ItemAdapter.autofill.getQuantity() - Integer.parseInt(itemQuantityET.getText().toString()),ItemAdapter.autofill.getPlatform(), ItemAdapter.autofill.getPicturePath(), true));
     }
 
-
     private void removeFromInventory(){
         itemViewModel.delete(ItemAdapter.autofill);
     }
-
 
     public static AddToSoldFragment newInstance() {
         return new AddToSoldFragment();

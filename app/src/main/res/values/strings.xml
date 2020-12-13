@@ -7,6 +7,28 @@
     <string name="title_inventory">Inventory</string>
     <string name="title_home">Home</string>
     <string name="title_sold">Sold</string>
+    <string name="seller_stats">Seller Stats</string>
+    <string name="seller_stats_listed">Listed</string>
+    <string name="seller_stats_sold">Sold</string>
+    <string name="seller_stats_profit">Profit</string>
+    <string name="emptyInventory_string">Your inventory is empty</string>
+    <string name="emptySoldInventory_string">No items sold</string>
+    <string name="emptyFavorites_string">Your favorites is empty</string>
     <string name="tab_text_1">Inventory</string>
     <string name="tab_text_2">Sold</string>
+    <string name="init_price_label_string">Inital Price: $</string>
+    <string name="sold_price_label_string">Sold Price: $</string>
+    <string name="platform_string">Platform (Optional)</string>
+    <string name="cv_platform_string">Platform: </string>
+    <string name="add_image_string">Add Image</string>
+    <string name="quantity_string">Quantity</string>
+    <string name="cv_quantity_string">Quantity: </string>
+    <string name="init_price_string">Initial Price</string>
+    <string name="sold_price_string">Sold Price</string>
+    <string name="desc_string">Description (Optional)</string>
+    <string name="item_name_string">Item name</string>
+    <string name="cancel_button_string">Cancel</string>
+    <string name="save_button_string">Save</string>
+
+
 </resources>

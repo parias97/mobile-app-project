@@ -29,6 +29,7 @@ import java.util.List;
 public class FavoritesFragment extends Fragment {
 
     private FavoritesViewModel favoritesViewModel;
+    private TextView emptyFavoritesTV;
     private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -53,13 +54,20 @@ public class FavoritesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
-        final FavoriteItemAdapter adapter = new FavoriteItemAdapter();
+        final FavoriteItemAdapter adapter = new FavoriteItemAdapter(favoritesViewModel);
         recyclerView.setAdapter(adapter);
+
+        emptyFavoritesTV = root.findViewById(R.id.emptyFavoritesTV);
 
         favoritesViewModel.getAllFavoriteItems().observe(getViewLifecycleOwner(), new Observer<List<FavoriteItem>>() {
             @Override
             public void onChanged(@Nullable List<FavoriteItem> favoriteItems) {
                 adapter.setItems(favoriteItems);
+                if(adapter.getItemCount() == 0){
+                    emptyFavoritesTV.setVisibility(View.VISIBLE);
+                } else {
+                    emptyFavoritesTV.setVisibility(View.GONE);
+                }
             }
         });
     }

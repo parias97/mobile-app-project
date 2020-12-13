@@ -2,11 +2,14 @@ package com.example.flipper_app.adapter;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,7 @@ import com.example.flipper_app.model.Item;
 import com.example.flipper_app.ui.ItemViewModel;
 import com.example.flipper_app.ui.inventory.InventoryFragment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.flipper_app.model.SoldItem;
@@ -31,7 +35,12 @@ import com.example.flipper_app.model.SoldItem;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
 
     private List<Item> items = new ArrayList<>();
+    private ItemViewModel itemViewModel;
     public static Item autofill;
+
+    public ItemAdapter(ItemViewModel itemViewModel){
+        this.itemViewModel = itemViewModel;
+    }
 
     @NonNull
     @Override
@@ -43,11 +52,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, final int position) {
         Item currentItem = items.get(position);
+        File imgFile = new File(currentItem.getPicturePath());
         holder.itemNameTV.setText(currentItem.getName());
         holder.itemInitialPriceTV.setText(String.valueOf(currentItem.getInitialPrice()));
         holder.itemQuantityTV.setText(String.valueOf(currentItem.getQuantity()));
         holder.itemPlatformTV.setText(currentItem.getPlatform());
-        // find image via path
+        if(imgFile.exists()) {
+            Bitmap imageBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            holder.itemImageView.setImageBitmap(imageBitmap);
+        }
     }
 
     // Get number of items in list.
@@ -73,7 +86,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
         private TextView itemInitialPriceTV;
         private TextView itemQuantityTV;
         private TextView itemPlatformTV;
+        private ImageView itemImageView;
         private ImageButton soldButton;
+        private ImageButton deleteButton;
 
         public ItemHolder(View itemView) {
             super(itemView);
@@ -81,7 +96,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             itemInitialPriceTV = itemView.findViewById(R.id.item_initial_price);
             itemQuantityTV = itemView.findViewById(R.id.item_quantity);
             itemPlatformTV = itemView.findViewById(R.id.item_platform);
+            itemImageView = itemView.findViewById(R.id.item_pic);
+
             soldButton = itemView.findViewById(R.id.soldIcon);
+            deleteButton = itemView.findViewById(R.id.deleteIcon);
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Item item = items.get(getAdapterPosition());
+                    deleteItemAt(getAdapterPosition());
+                    itemViewModel.delete(item);
+                }
+            });
+
             soldButton.setOnClickListener(this);
         }
 
@@ -98,13 +125,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
             autofill = new Item(item.getId(), itemName, desc, initPrice, quantity, platform, picPath, true);
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.navigation_add_to_sold);
-
-            /*SoldItem soldItem = new SoldItem(quantity, 3.45);
-            soldItem.setName(itemName);
-            soldItem.setPlatform(platform);
-            soldItem.setDesc(desc);
-            soldItem.setPicturePath(picPath);
-            soldItem.setInitialPrice(initPrice);*/
         }
     }
 }

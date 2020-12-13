@@ -16,8 +16,9 @@
 
         <ImageView
             android:id="@+id/item_pic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:layout_margin="5dp"
             android:src="@drawable/ic_baseline_search_24"/>
 
         <TextView
@@ -35,7 +36,7 @@
             android:layout_toRightOf="@id/item_pic"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Initial Price: $"
+            android:text="@string/init_price_label_string"
             android:textColor="#FFFFFF"/>
 
 
@@ -56,7 +57,7 @@
             android:layout_toRightOf="@id/item_pic"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Quantity: "
+            android:text="@string/cv_quantity_string"
             android:textColor="#FFFFFF"/>
 
         <TextView
@@ -73,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/item_quantity"
             android:layout_toRightOf="@id/item_pic"
-            android:text="Platform: "
+            android:text="@string/cv_platform_string"
             android:textColor="#FFFFFF"/>
 
         <TextView
@@ -85,12 +86,12 @@
             android:textColor="#FFFFFF"/>
 
         <ImageButton
-            android:id="@+id/favoriteIcon"
+            android:id="@+id/deleteIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/favorite_ic" />
+            android:src="@drawable/delete_ic" />
 
         <ImageButton
             android:id="@+id/soldIcon"

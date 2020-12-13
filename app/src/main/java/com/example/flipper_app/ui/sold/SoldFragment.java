@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flipper_app.R;
@@ -30,6 +31,7 @@ import java.util.List;
 public class SoldFragment extends Fragment {
 
     private ItemViewModel soldItemViewModel;
+    private TextView emptySoldInventoryTV;
     private View root;
 
     public static SoldFragment newInstance() {
@@ -55,12 +57,19 @@ public class SoldFragment extends Fragment {
         final SoldItemAdapter adapter = new SoldItemAdapter(getActivity());
         recyclerView.setAdapter(adapter);
 
+        emptySoldInventoryTV = root.findViewById(R.id.emptySoldInventoryTV);
+
         soldItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
         soldItemViewModel.getAllSoldItems().observe(getViewLifecycleOwner(), new Observer<List<SoldItem>>() {
             @Override
             public void onChanged(@Nullable List<SoldItem> soldItems) {
                 adapter.setItems(soldItems);
+                if(adapter.getItemCount() == 0){
+                    emptySoldInventoryTV.setVisibility(View.VISIBLE);
+                } else {
+                    emptySoldInventoryTV.setVisibility(View.GONE);
+                }
             }
         });
 

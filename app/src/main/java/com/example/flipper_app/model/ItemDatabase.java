@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Item.class, SoldItem.class, FavoriteItem.class}, version = 1)
+@Database(entities = {Item.class, SoldItem.class, FavoriteItem.class}, version = 2)
 public abstract class ItemDatabase extends RoomDatabase {
 
     private static ItemDatabase instance;
@@ -19,7 +19,6 @@ public abstract class ItemDatabase extends RoomDatabase {
     public abstract SoldItemDao soldItemDao();
 
     public abstract FavoriteItemDao favoriteItemDao();
-
     /* Create an ItemDatabase singleton. Only one database is needed.
      * This method is synchronized to prevent multiple threads from
      * creating a new database instance.

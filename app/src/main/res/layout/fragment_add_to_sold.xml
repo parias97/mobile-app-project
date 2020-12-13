@@ -19,7 +19,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="44dp"
         android:background="#F9AA33"
-        android:text="SAVE"
+        android:text="@string/save_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cancelButton" />
@@ -34,7 +34,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="44dp"
         android:background="#F9AA33"
-        android:text="CANCEL"
+        android:text="@string/cancel_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/saveButton"
         app:layout_constraintStart_toStartOf="parent" />
@@ -60,7 +60,7 @@
             android:id="@+id/itemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Item name" />
+            android:hint="@string/item_name_string" />
 
     </com.google.android.material.textfield.TextInputLayout>
     <!--item desc-->
@@ -83,7 +83,7 @@
             android:id="@+id/itemDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Description (Optional)" />
+            android:hint="@string/desc_string" />
 
     </com.google.android.material.textfield.TextInputLayout>
     <!--initial price-->
@@ -107,7 +107,7 @@
             android:id="@+id/itemInitPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Initial Price" />
+            android:hint="@string/init_price_string" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,7 +131,7 @@
             android:id="@+id/itemSoldPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sold Price" />
+            android:hint="@string/sold_price_string" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -155,7 +155,7 @@
             android:id="@+id/itemQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Quantity" />
+            android:hint="@string/quantity_string" />
 
     </com.google.android.material.textfield.TextInputLayout>
     <!--platform-->
@@ -179,7 +179,7 @@
             android:id="@+id/itemPlatform"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Platform (Optional)" />
+            android:hint="@string/platform_string" />
 
     </com.google.android.material.textfield.TextInputLayout>
     <!--pic path-->

@@ -13,13 +13,22 @@ public class FavoriteItem {
     private String name;
     private double initialPrice;
     private double soldPrice;
+    private String picPath;
 
     public FavoriteItem(String name, double initialPrice, double soldPrice) {
         this.name = name;
         this.initialPrice = initialPrice;
         this.soldPrice = soldPrice;
-
     }
+
+    public String getPicPath() {
+        return picPath;
+    }
+
+    public void setPicPath(String picPath) {
+        this.picPath = picPath;
+    }
+
 
     public void setId(int id) {
         this.id = id;
@@ -32,6 +41,8 @@ public class FavoriteItem {
     public double getSoldPrice() {
         return soldPrice;
     }
+
+
 
     public void setSoldPrice(double soldPrice) {
         this.soldPrice = soldPrice;

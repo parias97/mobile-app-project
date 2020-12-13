@@ -59,5 +59,4 @@ public class TabFragment extends Fragment {
                 }).attach();
         return view;
     }
-
 }
