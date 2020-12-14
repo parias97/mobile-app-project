@@ -49,17 +49,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemHolder> {
                 .inflate(R.layout.item, parent, false);
         return new ItemHolder(itemView);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, final int position) {
         Item currentItem = items.get(position);
         File imgFile = new File(currentItem.getPicturePath());
         holder.itemNameTV.setText(currentItem.getName());
-        holder.itemInitialPriceTV.setText(String.valueOf(currentItem.getInitialPrice()));
+        String formattedInitPrice =  String.format("%.2f", currentItem.getInitialPrice());
+        holder.itemInitialPriceTV.setText(formattedInitPrice);
         holder.itemQuantityTV.setText(String.valueOf(currentItem.getQuantity()));
         holder.itemPlatformTV.setText(currentItem.getPlatform());
         if(imgFile.exists()) {
             Bitmap imageBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            holder.itemImageView.setImageBitmap(imageBitmap);
+            Bitmap rotatedBitmap = MainActivity.stageForRotation(imageBitmap, imgFile);
+            holder.itemImageView.setImageBitmap(rotatedBitmap);
         }
     }
 

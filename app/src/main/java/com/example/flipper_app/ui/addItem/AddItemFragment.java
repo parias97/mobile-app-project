@@ -24,6 +24,8 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.example.flipper_app.MainActivity;
 import com.example.flipper_app.R;
 import com.example.flipper_app.model.Item;
 import com.example.flipper_app.ui.ItemViewModel;
@@ -47,7 +49,7 @@ public class AddItemFragment extends Fragment {
     private Button addImageButton;
     private ImageView imageHolder;
     private File imageFile;
-    public String imageFileName = "image.jpg";
+    public String imageFileName;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -96,7 +98,8 @@ public class AddItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageFile = getImageFileUri(imageFileName);
+                imageFileName =  String.valueOf(System.currentTimeMillis()) + ".jpg";
+                imageFile = getImageFileUri( imageFileName);
                 Uri fileProvider = FileProvider.getUriForFile(getActivity(), "com.example.flipper_app.fileprovider", imageFile);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
                 startActivityForResult(cameraIntent, CAPTURE_IMAGE_REQUEST_CODE);
@@ -161,34 +164,10 @@ public class AddItemFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Bitmap image = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
-        // Using source AS-IS. This code provides a way of changing the orientation of an
-        // image once captured.
-        //Source: https://stackoverflow.com/questions/14066038/why-does-an-image-captured-using-camera-intent-gets-rotated-on-some-devices-on-a
-        ExifInterface exif = null;
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                exif = new ExifInterface(imageFile);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
-        Bitmap rotatedBitmap = null;
 
-        switch (orientation) {
-            case ExifInterface.ORIENTATION_ROTATE_90:
-                rotatedBitmap = rotateImage(image, 90);
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_180:
-                rotatedBitmap = rotateImage(image, 180);
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_270:
-                rotatedBitmap = rotateImage(image, 270);
-                break;
-            default:
-                rotatedBitmap = image;
-                break;
-        }
+        // Return rotated image.
+        Bitmap rotatedBitmap = MainActivity.stageForRotation(image, imageFile);
+
         imageHolder.setImageBitmap(rotatedBitmap);
     }
 

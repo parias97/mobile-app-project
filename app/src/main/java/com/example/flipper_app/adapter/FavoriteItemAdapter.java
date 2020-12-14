@@ -14,6 +14,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flipper_app.MainActivity;
 import com.example.flipper_app.R;
 import com.example.flipper_app.model.FavoriteItem;
 import com.example.flipper_app.model.Item;
@@ -54,7 +55,8 @@ public class FavoriteItemAdapter extends RecyclerView.Adapter<FavoriteItemAdapte
         // Check if the image file exists before attempting to display the image.
         if(imgFile != null) {
             Bitmap imageBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            holder.itemImageView.setImageBitmap(imageBitmap);
+            Bitmap rotatedBitmap = MainActivity.stageForRotation(imageBitmap, imgFile);
+            holder.itemImageView.setImageBitmap(rotatedBitmap);
         }
     }
 

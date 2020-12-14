@@ -1,5 +1,8 @@
 package com.example.flipper_app;
 
+import android.graphics.Bitmap;
+import android.media.ExifInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +14,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.io.File;
+import java.io.IOException;
+
+import static com.example.flipper_app.ui.addItem.AddItemFragment.rotateImage;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +56,40 @@ public class MainActivity extends AppCompatActivity {
         // Navigate up to the top-level destination
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    // Using source AS-IS. This code provides a way of changing the orientation of an
+    // image once captured.
+    // Source: https://stackoverflow.com/questions/14066038/why-does-an-image-captured-using-camera-intent-gets-rotated-on-some-devices-on-a
+    public static Bitmap stageForRotation(Bitmap image, File imageFile){
+        ExifInterface exif = null;
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                exif = new ExifInterface(imageFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+        Bitmap rotatedBitmap = null;
+
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotatedBitmap = rotateImage(image, 90);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotatedBitmap = rotateImage(image, 180);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotatedBitmap = rotateImage(image, 270);
+                break;
+            default:
+                rotatedBitmap = image;
+                break;
+        }
+        return rotatedBitmap;
     }
 
     public void clearSelectedMenuItems(BottomNavigationView navView){

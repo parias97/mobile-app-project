@@ -17,6 +17,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flipper_app.MainActivity;
 import com.example.flipper_app.R;
 import com.example.flipper_app.model.FavoriteItem;
 import com.example.flipper_app.model.Item;
@@ -51,14 +52,17 @@ public class SoldItemAdapter extends RecyclerView.Adapter<SoldItemAdapter.SoldIt
         SoldItem currentItem = items.get(position);
         File imgFile = new File(currentItem.getPicturePath());
         holder.itemNameTV.setText(currentItem.getName());
-        holder.itemInitialPriceTV.setText(String.valueOf(currentItem.getInitialPrice()));
-        holder.itemSoldPriceTV.setText(String.valueOf(currentItem.getSoldPrice()));
+        String formattedInitPrice =  String.format("%.2f", currentItem.getInitialPrice());
+        holder.itemInitialPriceTV.setText(formattedInitPrice);
+        String formattedSoldPrice =  String.format("%.2f", currentItem.getSoldPrice());
+        holder.itemSoldPriceTV.setText(formattedSoldPrice);
         holder.itemQuantityTV.setText(String.valueOf(currentItem.getQuantity()));
         holder.itemPlatformTV.setText(currentItem.getPlatform());
         if(imgFile.exists()) {
             picPath = imgFile.getAbsolutePath();
             Bitmap imageBitmap = BitmapFactory.decodeFile(picPath);
-            holder.itemImageView.setImageBitmap(imageBitmap);
+            Bitmap rotatedBitmap = MainActivity.stageForRotation(imageBitmap, imgFile);
+            holder.itemImageView.setImageBitmap(rotatedBitmap);
         }
     }
 
